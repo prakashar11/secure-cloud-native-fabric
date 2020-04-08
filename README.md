@@ -1,10 +1,10 @@
 TODO:
 1. Fit SCF in K8s operator architecture; identify additional operators that can be included e.g., Calico
 2. Reorganize code as following components
-. Frontend
-. Controller - compliance based rules, different system config files e.g., neo4j
-. Event source - watch K8s API server, Docker runtime, Security Monkey
-. Enforcer - for k8s, AWS
+- Frontend
+- Controller - compliance based rules, different system config files e.g., neo4j
+- Event source - watch K8s API server, Docker runtime, Security Monkey
+- Enforcer - for k8s, AWS
 
 =========
 # SCF - Secure Cloud Native Fabric 
