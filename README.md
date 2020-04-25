@@ -1,3 +1,9 @@
+# Working backwards:
+
+- Keeping with K8s control loop principals while working with different compliance frameworks
+- Leverage best of breed container security products that use operator pattern; every security product comes with its own operator e.g., Synopsys, Aqua/Twistlock, falco; managing them from a central location
+- Normalizing the findings and plugging them to the container lifecycle & compliance framework 
+
 TODO:
 1. Fit SCF in K8s operator architecture; identify additional operators that can be included e.g., Calico
 2. Reorganize code as following components
