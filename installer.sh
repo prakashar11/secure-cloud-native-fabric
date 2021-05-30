@@ -95,10 +95,10 @@ else
     python manage.py migrate >/dev/null 2>&1
     printf "from ums.models import ScfUser as User; User.objects.create_superuser(first_name='scf',email='scf@aricent.com',password='scfadmin')"|python manage.py shell
     cd $PROJ_ROOT_PATH
-    chmod +x extra/*.sh
-    eval "printf \"$(cat extra/gunicorn_tmp.conf)\"" >extra/scrm_gunicorn.conf
-    eval "printf \"$(cat extra/scrm_nginx_tmp.conf)\"" >extra/scrm_nginx.conf
-    eval "printf \"$(cat extra/config_tmp.ini)\"" >config.ini
+    chmod +x config/*.sh
+    eval "printf \"$(cat config/gunicorn_tmp.conf)\"" >config/scrm_gunicorn.conf
+    eval "printf \"$(cat config/scrm_nginx_tmp.conf)\"" >config/scrm_nginx.conf
+    eval "printf \"$(cat config/config_tmp.ini)\"" >config.ini
     printf "\n... Migrations Installed!!!"
 
 
@@ -119,17 +119,17 @@ else
     printf "\n... Done"
 
     printf "\nInstalling services ..."
-    cp extra/scrm_gunicorn.conf /etc/supervisor/conf.d/
-    cp extra/scrm_nginx.conf /etc/nginx/sites-available/
-    cp extra/neo4j.conf /etc/neo4j/neo4j.conf
-    cp extra/gnatsd.config /srv/nats/
+    cp config/scrm_gunicorn.conf /etc/supervisor/conf.d/
+    cp config/scrm_nginx.conf /etc/nginx/sites-available/
+    cp config/neo4j.conf /etc/neo4j/neo4j.conf
+    cp config/gnatsd.config /srv/nats/
     rm -rf /etc/nginx/sites-enabled/default
     ln -s /etc/nginx/sites-available/scrm_nginx.conf /etc/nginx/sites-enabled/default
 
     printf "\nRunning Services ..."
-    cp extra/nats_tmp.service /etc/systemd/system/nats.service 
-    cp extra/elasticsearch_tmp.service /etc/systemd/system/elasticsearch.service
-    cp extra/neo4j_tmp.service /etc/systemd/system/neo4j.service
+    cp config/nats_tmp.service /etc/systemd/system/nats.service 
+    cp config/elasticsearch_tmp.service /etc/systemd/system/elasticsearch.service
+    cp config/neo4j_tmp.service /etc/systemd/system/neo4j.service
     cd /etc/systemd/system
     systemctl enable nats.service
     systemctl enable elasticsearch.service
@@ -145,7 +145,7 @@ else
     printf "\nStarting Applications ..."
     cd $PROJ_ROOT_PATH
     . scrm_venv/bin/activate
-    cd SCRM
+    #cd SCRM
     sh ./restart.sh
     printf "\n... All Done !!"
 
